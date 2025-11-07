@@ -205,11 +205,8 @@ const App: React.FC = () => {
     }
   };
 
-  const showHeader = view !== 'home' || isTeacherAuthenticated;
-
   return (
     <div className={`min-h-screen bg-slate-100 font-sans`}>
-     {showHeader && (
        <header className="bg-white shadow-sm sticky top-0 z-50">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
              <div onClick={navigateHome} className="flex items-center gap-2 cursor-pointer">
@@ -230,7 +227,6 @@ const App: React.FC = () => {
             </div>
           </div>
         </header>
-     )}
       <main className="container mx-auto p-4 md:p-8">
         {renderContent()}
       </main>

@@ -98,7 +98,7 @@ Ce fichier documente l'historique des requêtes (prompts) et les actions de dév
 *   Suppression de la case à cocher "Se souvenir de moi" et automatisation de la sauvegarde des comptes après une connexion ou une inscription réussie.
 
 ### 10. Modification du Flux de Navigation
-> **Requêtes successives :** "وعند الضغط على تغيير الحساب قم مباشرة بإضهار الواجهة الرئيسية للمنصة" -> "استبدل زر الانتقال الى حساب الاستاذ بكلمة تظهر في جميع الحسابات : 'تغيير الحساب'" -> "عند الضغط على تغيير الحساب او الخروج قم مباشرة بإظهار الواجهة الرئيسية"
+> **Requêtes successives :** "وعند الضغط على تغيير الحساب قم مباشرة بإضهار الواجهة الرئيسية للمنصة" -> "استبدل زر الانتقال الى حساب الاستاذ بكلمة تظهر في جميع الحسابات : 'تغيير الحساب'" -> "عند الضغط على تغيير الحساب او الخروج قم مباشرة بإضهار الواجهة الرئيسية"
 
 #### Réponse
 *   Modification du bouton "Changer de compte" pour qu'il redirige vers l'écran d'accueil principal (sélection du rôle).
@@ -164,4 +164,11 @@ Ce fichier documente l'historique des requêtes (prompts) et les actions de dév
 
 #### Réponse
 *   Mise à jour du mécanisme de verrouillage de l'accès enseignant pour utiliser `localStorage` au lieu de `sessionStorage`.
-*   Ce changement rend le verrouillage persistant même après la fermeture et la réouverture du navigateur, renforçant ainsi la sécurité et rendant le système de temporisation impossible à contourner, conformément à la demande d'un système "très strict".
+*   Ce changement rend le verrouillage persistant même après la fermeture et la réouverture du navigateur, renforçant ainsi la sécurité et rendant le système de temporisation impossible à contourner.
+
+### 19. Affichage Permanent de l'En-tête
+> **Requête :** "ajout le header au page d'accueil"
+
+#### Réponse
+*   Modification de la logique de rendu dans `App.tsx` pour rendre l'en-tête principal visible sur toutes les pages, y compris l'écran de sélection de rôle initial.
+*   Suppression de la condition qui masquait auparavant l'en-tête, assurant une expérience cohérente.
