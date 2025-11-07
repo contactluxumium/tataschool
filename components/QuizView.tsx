@@ -4,6 +4,7 @@ import { lmsService } from '../services/lmsService';
 import { Clock, Lightbulb, LoaderCircle, PartyPopper } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { useTranslation } from '../contexts/TranslationContext';
+import { GEMINI_API_KEY } from '../services/apiKey';
 
 interface QuizViewProps {
   lessonId: string;
@@ -93,7 +94,13 @@ export const QuizView: React.FC<QuizViewProps> = ({ lessonId, student, onQuizCom
     setAiHelpResponse('');
 
     try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
+            setAiHelpResponse(t('quiz.apiKeyMissing'));
+            setIsAiHelpLoading(false);
+            return;
+        }
+
+        const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
         const systemInstruction = language === 'ar' 
           ? `أنت أستاذ رياضيات كايعاون التلاميذ في المغرب. خدمتك هي تعطي تلميح بسيط أو تشرح مرحلة بمرحلة للتمرين لي جاي بلا ما تعطي الجواب الأخير نيشان. خلي شرحك ساهل وواضح بالدارجة المغربية. شجع التلميذ وقوليه راه قادر يجاوب عليه.`

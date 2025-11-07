@@ -114,6 +114,7 @@ export const fr = {
     gettingHelp: 'Aide en cours...',
     aiHelpTitle: 'Aide du professeur',
     aiError: 'Désolé, impossible d\'obtenir de l\'aide pour le moment. Veuillez réessayer.',
+    apiKeyMissing: 'La fonctionnalité "Aide du professeur" n\'est pas activée. Veuillez en informer l\'administrateur de la plateforme.',
     confirmAnswer: 'Confirmer la réponse',
     quizFinishedTitle: 'Quiz terminé !',
     timeUp: 'Temps écoulé !',
