@@ -1,16 +1,26 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-11-04',
-  title: 'lessons.lesson_11_04_title',
+  title: {
+    fr: 'Principes de Logique',
+    ar: 'مبادئ في المنطق',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-11-04-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Quelle est la négation de "il pleut" ?',
+        ar: 'ما هو نفي عبارة "إنها تمطر"؟',
+      },
+      options: [
+        { fr: 'il neige', ar: 'إنها تثلج' },
+        { fr: 'il ne pleut pas', ar: 'إنها لا تمطر' },
+        { fr: 'il fait beau', ar: 'الجو جميل' },
+      ],
+      correctAnswer: { fr: 'il ne pleut pas', ar: 'إنها لا تمطر' },
+    },
+  ],
 };

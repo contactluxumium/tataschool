@@ -1,16 +1,26 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-12-01',
-  title: 'lessons.lesson_12_01_title',
+  title: {
+    fr: 'Limites et Continuité',
+    ar: 'النهايات والاتصال',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-12-01-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Quelle est la limite de 1/x quand x tend vers +∞ ?',
+        ar: 'ما هي نهاية 1/x عندما يؤول x إلى +∞؟',
+      },
+      options: [
+        { fr: '+∞', ar: '+∞' },
+        { fr: '1', ar: '١' },
+        { fr: '0', ar: '٠' },
+      ],
+      correctAnswer: { fr: '0', ar: '٠' },
+    },
+  ],
 };

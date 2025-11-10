@@ -1,16 +1,27 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-07-03',
-  title: 'lessons.lesson_07_03_title',
+  title: {
+    fr: 'Les Puissances',
+    ar: 'القوى',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-07-03-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Que vaut 10³ ?',
+        ar: 'كم يساوي 10³ ؟',
+      },
+      mathExpression: '10³',
+      options: [
+        { fr: '30', ar: '٣٠' },
+        { fr: '100', ar: '١٠٠' },
+        { fr: '1000', ar: '١٠٠٠' },
+      ],
+      correctAnswer: { fr: '1000', ar: '١٠٠٠' },
+    },
+  ],
 };

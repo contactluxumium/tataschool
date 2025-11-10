@@ -91,7 +91,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ student, onS
   const totalCompleted = progressValues.filter(p => p.passed).length;
   const studyLevelName = t(`levels.${student.studyLevelId}`) || t('studentDashboard.unspecified');
 
-  const totalLessonsWithQuestions = content.levels.flatMap(l => l.lessons).filter(l => l.questions.length === 20).length;
+  const totalLessonsWithQuestions = content.levels.flatMap(l => l.lessons).filter(l => l.questions.length >= 10).length;
   const lessonsPercentage = totalLessonsWithQuestions > 0 ? Math.round((totalCompleted / totalLessonsWithQuestions) * 100) : 0;
 
   const totalPointsEarned = progressValues.reduce((sum, p) => sum + p.score, 0);
@@ -104,7 +104,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ student, onS
   const studentLevelIndex = content.levels.findIndex(l => l.id === student.progressLevelId);
   
   const level1 = content.levels.find(l => l.id === 'level-01');
-  const level1LessonsWithQuestions = level1 ? level1.lessons.filter(l => l.questions.length === 20) : [];
+  const level1LessonsWithQuestions = level1 ? level1.lessons.filter(l => l.questions.length >= 10) : [];
   const isLevel1CompleteForDemo = student.id === 'DEMO_STUDENT' && level1LessonsWithQuestions.length > 0 && level1LessonsWithQuestions.every(l => student.progress[l.id]?.passed);
 
   return (
@@ -197,6 +197,9 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ student, onS
 
       {content.levels.map((level, index) => {
         const isLevelLocked = index > studentLevelIndex;
+        const lessonsWithQuestions = level.lessons.filter(l => l.questions.length > 0);
+        if (lessonsWithQuestions.length === 0) return null;
+
         return (
           <React.Fragment key={level.id}>
             {level.id === 'level-02' && isLevel1CompleteForDemo && (
@@ -214,13 +217,13 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ student, onS
             <div className={`p-6 rounded-lg shadow-md ${isLevelLocked ? 'bg-gray-200' : 'bg-white'}`}>
               <h3 className="text-2xl font-bold mb-4 flex items-center">
                 {isLevelLocked ? <LockIcon className="w-6 h-6 me-2" /> : <BookIcon className="w-6 h-6 me-2 text-blue-600" />}
-                {t(level.title)}
+                {level.title[language]}
               </h3>
               {isLevelLocked ? (
                 <p className="text-gray-500">{t('studentDashboard.levelLocked')}</p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {level.lessons.filter(l => l.questions.length === 20).map(lesson => {
+                  {lessonsWithQuestions.map(lesson => {
                     const result = student.progress[lesson.id];
                     const isUnlocked = lmsService.isLessonUnlocked(student, lesson.id);
                     const status = result?.passed ? 'passed' : result ? 'failed' : 'pending';
@@ -232,7 +235,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ student, onS
                           : status === 'failed' ? 'bg-red-50 border-red-400'
                           : 'bg-white border-gray-300'
                       }`}>
-                        <h4 className="font-bold text-lg text-gray-800">{t(lesson.title)}</h4>
+                        <h4 className="font-bold text-lg text-gray-800">{lesson.title[language]}</h4>
                         
                         <div className="mt-3 text-sm flex justify-between items-center gap-2">
                             <div className="flex items-center gap-1.5 text-yellow-700">

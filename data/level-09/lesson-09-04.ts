@@ -1,16 +1,26 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-09-04',
-  title: 'lessons.lesson_09_04_title',
+  title: {
+    fr: 'Systèmes de Deux Équations',
+    ar: 'نظمة معادلتين',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-09-04-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Le couple (2,1) est-il solution du système {x+y=3; x-y=1} ?',
+        ar: 'هل الزوج (2,1) حل للنظمة {x+y=3; x-y=1}؟',
+      },
+      options: [
+        { fr: 'Oui', ar: 'نعم' },
+        { fr: 'Non', ar: 'لا' },
+        { fr: 'On ne peut pas savoir', ar: 'لا يمكن المعرفة' },
+      ],
+      correctAnswer: { fr: 'Oui', ar: 'نعم' },
+    },
+  ],
 };

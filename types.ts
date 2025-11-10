@@ -1,4 +1,5 @@
-// FIX: Export all type definitions so they can be imported by other modules.
+// types.ts
+
 export type LocalizedString = {
   ar: string;
   fr: string;
@@ -6,36 +7,37 @@ export type LocalizedString = {
 
 export enum QuestionType {
   MultipleChoice = 'MCQ',
-  NumericInput = 'NUMERIC',
   TrueFalse = 'TF',
+  NumericInput = 'NUMERIC',
 }
 
 export enum Difficulty {
   Easy = 'Easy',
   Medium = 'Medium',
   Hard = 'Hard',
+  Deep = 'Deep', // Integral Situation Or Problem Situation
 }
 
 export interface Question {
   id: string;
   type: QuestionType;
   difficulty: Difficulty;
-  text: string;
+  text: LocalizedString;
   mathExpression?: string;
-  options?: string[];
-  correctAnswer: string;
-  explanation?: string;
+  options?: LocalizedString[];
+  correctAnswer: LocalizedString;
+  explanation?: LocalizedString;
 }
 
 export interface Lesson {
   id: string;
-  title: string;
+  title: LocalizedString;
   questions: Question[];
 }
 
 export interface Level {
   id: string;
-  title: string;
+  title: LocalizedString;
   lessons: Lesson[];
 }
 
@@ -49,7 +51,7 @@ export interface LessonResult {
   passed: boolean;
   firstAttemptDate: string;
   lastAttemptDate: string;
-  answers: Record<string, string>;
+  answers: Record<string, string>; // Storing the answer string in the current language
   attempts: number;
   durationInSeconds?: number;
 }

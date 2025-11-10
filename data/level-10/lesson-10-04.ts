@@ -1,16 +1,26 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-10-04',
-  title: 'lessons.lesson_10_04_title',
+  title: {
+    fr: 'La Projection dans le Plan',
+    ar: 'الإسقاط في المستوى',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-10-04-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Le projeté d\'un point sur une droite est...',
+        ar: 'مسقط نقطة على مستقيم هو...',
+      },
+      options: [
+        { fr: 'une droite', ar: 'مستقيم' },
+        { fr: 'un point', ar: 'نقطة' },
+        { fr: 'un segment', ar: 'قطعة' },
+      ],
+      correctAnswer: { fr: 'un point', ar: 'نقطة' },
+    },
+  ],
 };

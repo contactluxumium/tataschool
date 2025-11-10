@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Student, LessonResult } from '../types';
+import { Student, LessonResult, LocalizedString } from '../types';
 import { lmsService } from '../services/lmsService';
 import { SlidersHorizontal } from 'lucide-react';
 import { useTranslation } from '../contexts/TranslationContext';
@@ -40,7 +40,7 @@ const BarChartComponent: React.FC<BarChartProps> = ({ title, data, color }) => {
 };
 
 export const PerformanceAnalytics: React.FC = () => {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const [students, setStudents] = useState<Student[]>([]);
     const [filters, setFilters] = useState({
         studyLevelId: 'all',
@@ -57,7 +57,6 @@ export const PerformanceAnalytics: React.FC = () => {
 
     const enhancedStudents = useMemo(() => {
         return students.map(student => {
-            // FIX: Explicitly cast Object.values to LessonResult[] to ensure correct type inference for reduce/filter operations.
             const progressValues = Object.values(student.progress) as LessonResult[];
             const totalPoints = progressValues.reduce((sum, p) => sum + p.score, 0);
             const totalAttemptedPoints = progressValues.reduce((sum, p) => sum + p.totalQuestions, 0);
@@ -78,8 +77,9 @@ export const PerformanceAnalytics: React.FC = () => {
             const levelMatch = filters.studyLevelId === 'all' || student.studyLevelId === filters.studyLevelId;
             const schoolTypeMatch = filters.schoolType === 'all' || student.schoolType === filters.schoolType;
             const genderMatch = filters.gender === 'all' || student.gender === filters.gender;
-            // FIX: Correctly check both French and Arabic school names for a match.
-            const schoolNameMatch = !filters.schoolName || student.schoolName.fr.toLowerCase().includes(filters.schoolName.toLowerCase()) || student.schoolName.ar.toLowerCase().includes(filters.schoolName.toLowerCase());
+            const schoolNameMatch = !filters.schoolName || 
+                (student.schoolName.fr && student.schoolName.fr.toLowerCase().includes(filters.schoolName.toLowerCase())) || 
+                (student.schoolName.ar && student.schoolName.ar.toLowerCase().includes(filters.schoolName.toLowerCase()));
             const birthYearStartMatch = !filters.birthYearStart || student.birthYear >= parseInt(filters.birthYearStart, 10);
             const birthYearEndMatch = !filters.birthYearEnd || student.birthYear <= parseInt(filters.birthYearEnd, 10);
 
@@ -102,7 +102,6 @@ export const PerformanceAnalytics: React.FC = () => {
         const totalAttemptedPoints = filteredStudents.reduce((sum, s) => sum + s.totalAttemptedPoints, 0);
         const avgScore = totalAttemptedPoints > 0 ? Math.round((totalPoints / totalAttemptedPoints) * 100) : 0;
 
-        // FIX: Explicitly cast Object.values to LessonResult[] to ensure correct type inference for the inner reduce.
         const totalAttempts = filteredStudents.reduce((sum, s) => sum + (Object.values(s.progress) as LessonResult[]).reduce((attSum, p) => attSum + p.attempts, 0), 0);
         
         return {

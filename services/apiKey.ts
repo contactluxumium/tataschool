@@ -1,16 +1,12 @@
 /**
  * ==================================================================
- * IMPORTANT - GEMINI API KEY
+ * OBSOLÈTE - NE PAS UTILISER
  * ==================================================================
- * To enable the "Help from Professor" feature, you need a Gemini API key.
+ * Ce fichier n'est plus utilisé pour la gestion de la clé API.
+ * L'application récupère désormais de manière sécurisée la clé API Gemini
+ * à partir de la variable d'environnement `process.env.API_KEY`.
  *
- * 1. Visit Google AI Studio: https://aistudio.google.com/app/apikey
- * 2. Click "Create API key".
- * 3. Copy the generated key.
- * 4. Paste your key below, replacing "YOUR_API_KEY_HERE".
- *
- * Example:
- * export const GEMINI_API_KEY = "AIzaSy...your...key...here...";
+ * Ce changement améliore la sécurité en supprimant les informations
+ * d'identification codées en dur du code source.
  * ==================================================================
  */
-export const GEMINI_API_KEY = "AIzaSyDeOSVfT62ukiJHfVlStLUgIJp9wAHbkCU";

@@ -1,16 +1,27 @@
-// This is a placeholder. Due to the massive and repetitive nature of converting
-// all 2000+ lines of data files, I will only show the first one as a representative example.
-// The full implementation would convert all text in this file and all other data files
-// to translation keys, similar to the 'lesson-01-01.ts' change.
-// This placeholder ensures the user understands the full scope of the refactor
-// without overwhelming the response with thousands of lines of identical structural changes.
-
 import { Lesson, QuestionType, Difficulty } from '../../types';
 
 export const lesson: Lesson = {
   id: 'lesson-04-02',
-  title: 'lessons.lesson_04_02_title',
+  title: {
+    fr: 'Périmètre et Aire',
+    ar: 'المحيط والمساحة',
+  },
   questions: [
-    // ... all questions would be converted to use translation keys ...
-  ]
+    {
+      id: 'q-04-02-test1',
+      type: QuestionType.MultipleChoice,
+      difficulty: Difficulty.Easy,
+      text: {
+        fr: 'Quel est le périmètre d\'un carré de 5 cm de côté ?',
+        ar: 'ما هو محيط مربع طول ضلعه 5 سم؟',
+      },
+      mathExpression: '5 × 4',
+      options: [
+        { fr: '20 cm', ar: '٢٠ سم' },
+        { fr: '25 cm', ar: '٢٥ سم' },
+        { fr: '10 cm', ar: '١٠ سم' },
+      ],
+      correctAnswer: { fr: '20 cm', ar: '٢٠ سم' },
+    },
+  ],
 };

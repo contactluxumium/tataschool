@@ -67,7 +67,6 @@ export const StudentDataTable: React.FC = () => {
     };
 
      const enhanceStudent = (student: Student): EnhancedStudent => {
-        // FIX: Explicitly cast Object.values to LessonResult[] to ensure correct type inference for reduce/filter operations.
         const progressValues = Object.values(student.progress) as LessonResult[];
         const totalPoints = progressValues.reduce((sum, p) => sum + p.score, 0);
         const completedLessons = progressValues.filter(p => p.passed).length;
@@ -76,7 +75,8 @@ export const StudentDataTable: React.FC = () => {
         const scorePercentage = totalAttemptedPoints > 0 ? Math.round((totalPoints / totalAttemptedPoints) * 100) : 0;
         
         const studyLevelName = t(`levels.${student.studyLevelId}`) || t('studentDashboard.unspecified');
-        const progressLevelName = t(`levels.${student.progressLevelId}`) || t('studentDashboard.unspecified');
+        const progressLevel = content.levels.find(l => l.id === student.progressLevelId);
+        const progressLevelName = progressLevel ? progressLevel.title[language] : t('studentDashboard.unspecified');
 
         return {
             ...student,
@@ -356,7 +356,7 @@ export const StudentDataTable: React.FC = () => {
                                         onClick={() => setActiveLevelId(activeLevelId === level.id ? null : level.id)}
                                         className="w-full flex justify-between items-center text-start p-3 font-semibold bg-gray-100 rounded-md hover:bg-gray-200"
                                     >
-                                        <span>{t(level.title)}</span>
+                                        <span>{level.title[language]}</span>
                                         <ChevronDown size={20} className={`transition-transform ${activeLevelId === level.id ? 'rotate-180' : ''}`} />
                                     </button>
                                     {activeLevelId === level.id && (
@@ -366,7 +366,7 @@ export const StudentDataTable: React.FC = () => {
                                                 const isUnlocked = lmsService.isLessonUnlocked(selectedStudent, lesson.id);
                                                 return (
                                                     <div key={lesson.id} className="border-s-4 ps-3 pe-1 pb-2 border-slate-200">
-                                                        <p className="font-bold">{t(lesson.title)}</p>
+                                                        <p className="font-bold">{lesson.title[language]}</p>
                                                         {!isUnlocked ? (
                                                             <p className="text-xs text-gray-500">{t('studentDataTable.locked')}</p>
                                                         ) : result ? (

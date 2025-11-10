@@ -7,6 +7,6 @@ import { lesson as lesson5 } from './lesson-10-05';
 
 export const level10: Level = {
   id: 'level-10',
-  title: 'levelTitles.level_10_main_title',
+  title: { fr: 'levelTitles.level_10_main_title', ar: 'levelTitles.level_10_main_title' },
   lessons: [lesson1, lesson2, lesson3, lesson4, lesson5],
 };
